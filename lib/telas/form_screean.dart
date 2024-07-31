@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -10,7 +11,7 @@ class FormPage extends StatefulWidget {
 class _FormPageState extends State<FormPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController difficultyController = TextEditingController();
-  final TextEditingController _imageController = TextEditingController();
+  final TextEditingController imageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +19,10 @@ class _FormPageState extends State<FormPage> {
       debugShowCheckedModeBanner: false,
       title: 'FormScream',
       theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        brightness: Brightness.light
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.light,
+        ),
       ),
       home: Form(
         child: Scaffold(
@@ -78,18 +80,22 @@ class _FormPageState extends State<FormPage> {
 
                   ///Image Controller
                   Padding(
-                    padding: const EdgeInsets.only(top: 15.0),
+                    padding: const EdgeInsets.only(top: 15),
                     child: TextFormField(
-                      controller: _imageController,
+                      onChanged: (text) {
+                        setState(() {});
+                      },
+                      controller: imageController,
                       validator: (value) {
                         if (value != null && value.isEmpty) {
-                          return 'A url não é válida';
+                          return 'O campo Url está';
                         }
                         return null;
                       },
+                      keyboardType: TextInputType.url,
                       decoration: InputDecoration(
-                        label: const Text('Url'),
-                        helper: const Text('Insira uma Url'),
+                        label: const Text('Insira uma Url'),
+                        helper: const Text('Insira uma url válida'),
                         filled: true,
                         fillColor: Colors.white24,
                         border: OutlineInputBorder(
@@ -97,25 +103,31 @@ class _FormPageState extends State<FormPage> {
                       ),
                     ),
                   ),
-
-                  ///PreView Image
+                  //imageContainer
                   Container(
-                    width: 72,
+                    margin: const EdgeInsets.only(top: 20),
                     height: 100,
+                    width: 72,
                     decoration: BoxDecoration(
-                      color: Colors.blue[300],
                       borderRadius: BorderRadius.circular(10),
+                      color: Colors.blue,
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(1, 45, 126, 232)
+                              .withOpacity(0.5),
+                          offset: const Offset(3, 3),
+                          blurRadius: 5.0,
+                        )
+                      ],
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-
-                      ///imageController.text: Transforma as informações recebidas pelo imageControler em String
                       child: Image.network(
-                        _imageController.text,
+                        imageController.text,
                         fit: BoxFit.cover,
                         errorBuilder: (BuildContext context, Object exeption,
-                            StackTrace? stackTrace) {
-                          return Image.asset('assets/images/log.png');
+                            StackTrace? stackTrace){
+                          return Image.asset("assets/images/log.png");
                         },
                       ),
                     ),
@@ -127,8 +139,14 @@ class _FormPageState extends State<FormPage> {
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          foregroundColor: Colors.blue[100]),
+                        backgroundColor: Colors.blue,
+                        textStyle: const TextStyle(color: Colors.white),
+                        shape: const ContinuousRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                      ),
                       child: const Text('Adicionar'),
                     ),
                   )
