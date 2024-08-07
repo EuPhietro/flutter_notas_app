@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
-import '../imports.dart/tela_1.dart';
 
-class InitialScream extends StatefulWidget {
-  const InitialScream({super.key});
+import 'package:my_app_flutter/data/task_inherited.dart';
+import 'package:my_app_flutter/telas/form_screean.dart';
+import '../imports.dart/task.dart';
+
+class InitialScreen extends StatefulWidget {
+  const InitialScreen({super.key});
 
   @override
-  State<InitialScream> createState() => _InitialScreamState();
+  State<InitialScreen> createState() => _InitialScreenState();
 }
 
-class _InitialScreamState extends State<InitialScream> {
-  bool opacidade = true;
+Mensage() {}
+void onButtonClicked(BuildContext context, String route) {
+  Navigator.of(context).pushNamed(route);
+}
 
+class _InitialScreenState extends State<InitialScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,63 +26,31 @@ class _InitialScreamState extends State<InitialScream> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          leading: const Icon(Icons.menu_open),
-          backgroundColor: Colors.blue,
-          title: const Text(
-            'Tarefas',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
+      home: TaskInherited(
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            leading: const Icon(Icons.menu_open),
+            backgroundColor: Colors.blue,
+            title: const Text(
+              'Tarefas',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
             ),
           ),
-        ),
-        body: AnimatedOpacity(
-          opacity: opacidade ? 1 : 0,
-          duration: const Duration(milliseconds: 800),
-          child: ListView(
-            children: [
-              Tasks(
-                nome: 'Aprender flutter',
-                foto:
-                    'https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large',
-                dificuldade: 0,
-              ),
-              Tasks(
-                nome: 'Aprender flutter',
-                foto:
-                    'https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large',
-                dificuldade: 1,
-              ),
-              Tasks(
-                nome: 'Aprender flutter',
-                foto:
-                    'https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large',
-                dificuldade: 10,
-              ),
-              Tasks(
-                nome: 'Aprender flutter',
-                foto:
-                    'https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large',
-                dificuldade: 3,
-              ),
-              const SizedBox(
-                height: 80,
-              ),
-            ],
+          body: ListView(
+            children: [const Placeholder()],
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              opacidade = !opacidade;
-            });
-          },
-          backgroundColor: Colors.blue,
-          child: const Icon(Icons.visibility),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              onButtonClicked(context, "/formPage");
+            },
+            backgroundColor: Colors.blue,
+            child: const Icon(Icons.add),
+          ),
         ),
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'tela_1.dart';
+import 'task.dart';
 
 class Difficulty extends StatefulWidget {
   final int difficultyLevel;
