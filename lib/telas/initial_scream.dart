@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:my_app_flutter/data/task_inherited.dart';
-import 'package:my_app_flutter/telas/form_screean.dart';
-import '../imports.dart/task.dart';
+import '../imports.dart/error_widget.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -11,7 +10,7 @@ class InitialScreen extends StatefulWidget {
   State<InitialScreen> createState() => _InitialScreenState();
 }
 
-Mensage() {}
+mensage() {}
 void onButtonClicked(BuildContext context, String route) {
   Navigator.of(context).pushNamed(route);
 }
@@ -19,15 +18,15 @@ void onButtonClicked(BuildContext context, String route) {
 class _InitialScreenState extends State<InitialScreen> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: TaskInherited(
-        child: Scaffold(
+    return TaskInherited(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
             leading: const Icon(Icons.menu_open),
@@ -42,7 +41,10 @@ class _InitialScreenState extends State<InitialScreen> {
             ),
           ),
           body: ListView(
-            children: [const Placeholder()],
+            children: TaskInherited.of(context)?.listTask ??
+                [
+                  const Error(),
+                ],
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {

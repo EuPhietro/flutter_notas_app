@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:my_app_flutter/imports.dart/task.dart';
+import 'package:my_app_flutter/imports.dart/Task.dart';
 
 class TaskInherited extends InheritedWidget {
   TaskInherited({super.key, required this.child}) : super(child: child);
 
+  @override
   final Widget child;
 
   static TaskInherited? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<TaskInherited>();
   }
 
- final List<Tasks> listTask = [
+ final listTask = <Tasks>[
     Tasks(
       nome: 'Aprender flutter',
       foto: 'https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large',

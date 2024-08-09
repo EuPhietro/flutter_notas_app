@@ -5,6 +5,8 @@ final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
 
 class GlobalSnackBar extends StatefulWidget {
+  const GlobalSnackBar({super.key});
+
   @override
   State<GlobalSnackBar> createState() => _GlobalSnackBarState();
 }

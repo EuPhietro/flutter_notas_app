@@ -21,8 +21,8 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       initialRoute: "/initialPage",
       routes: {
-        "/initialPage": (context) => InitialScreen(),
-        "/formPage": (context) => FormPage(),
+        "/initialPage": (context) => const InitialScreen(),
+        "/formPage": (context) => const FormPage(),
       },
     );
   }
